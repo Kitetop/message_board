@@ -7,6 +7,7 @@
 /Api/vendor
 .idea
 /Api/.idea
+/Api/upload/
 /website/.idea
 /website/test/unit/coverage/
 /website/e2e/reports/

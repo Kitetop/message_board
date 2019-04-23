@@ -92,7 +92,6 @@ abstract class AbstractAction
 
     /**
      * 表单文件的验证
-     *
      * @param array $rules
      * @return mixed
      */

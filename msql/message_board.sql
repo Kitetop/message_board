@@ -7,7 +7,9 @@ create table message_user (
   account varchar(100) NOT NULL COMMENT '登录账号',
   username varchar(50) NOT NULL COMMENT '用户名',
   password varchar(100) NOT NULL,
-  status tinyint NOT NULL COMMENT '用户类型（1.管理员 2。普通用户）',
+  sex tinyint DEFAULT 3 COMMENT '用户性别（0、女 1、男 3、保密）',
+  image varchar(100) COMMENT '用户照片保存路径',
+  status tinyint NOT NULL COMMENT '用户类型（1、管理员 2、普通用户）',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

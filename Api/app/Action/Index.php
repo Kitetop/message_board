@@ -24,12 +24,12 @@ class Index extends AbstractAction
     ];
     protected function doGet()
     {
-        $this->validate($this->getRules);
-        $service = $this->Service('Index');
-        $service->username = $this->params['username'];
-        $data = $service->run();
-        $this->response('message', $data);
-        $this->code(201);
+//        $this->validate($this->getRules);
+//        $service = $this->Service('Index');
+//        $service->username = $this->params['username'];
+//        $data = $service->run();
+//        $this->response('message', $data);
+//        $this->code(201);
     }
 
     protected $modelFileRules = [

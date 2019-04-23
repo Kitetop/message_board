@@ -37,6 +37,12 @@ $config['logger'] = [
     'write' => $config['root'] . '/runtime/logs/default_error.log',
     'level' => 7
 ];
+
+/**
+ * 文件上传路径
+ */
+$config['upload'] = __DIR__ . '/../../upload';
+
 /**
  * 数据库配置信息
  */

@@ -5,7 +5,7 @@
  * Date: 2019-04-14
  */
 
-namespace App\Action\User;
+namespace App\Action;
 
 
 use Kite\Action\AbstractAction;
@@ -27,9 +27,9 @@ class Login extends AbstractAction
     protected function doPost()
     {
         $this->validate($this->postRules);
-        $this->params['password'] = md5($this->params['password']);
-        $service = $this->Service('User\Login');
-        $service->account = $this->params['account'];
+        $this->params['password'] = md5(trim($this->params['password']));
+        $service = $this->Service('Login');
+        $service->account = trim($this->params['account']);
         $service->password = $this->params['password'];
         $result = $service->run();
         $this->response($result);
