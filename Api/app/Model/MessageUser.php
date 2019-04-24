@@ -12,8 +12,14 @@ use Kite\Model\AbstractModel;
 
 class MessageUser extends AbstractModel
 {
+    //用户身份常量
     const NORMAL_USER = 2;
     const ADMINER = 1;
+
+    //用户状态常量
+    const ACTIVE = 0;
+    const BAN =1;
+
     protected function table()
     {
         // TODO: Implement table() method.

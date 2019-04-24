@@ -29,9 +29,10 @@ class Register extends AbstractService
                 'password' => $this->password,
                 'sex' => $this->sex,
                 'image' => $path,
+                'active' => MessageUser::ACTIVE,
                 'status' => MessageUser::NORMAL_USER,
             ])->save();
-            $this->image->moveTo($this->config['upload'] . '/user/'. $path);
+            $this->image->moveTo($this->config['upload'] . $path);
             return Response::success('用户创建成功');
         }catch (\Exception $e) {
             return  Response::error(400, '用户创建失败，请稍后在试');
@@ -40,6 +41,6 @@ class Register extends AbstractService
 
     private function setPath($account, $image)
     {
-        return md5($account) . time() . '.' . $image->getExt();
+        return '/user/' . md5($account) . time() . '.' . $image->getExt();
     }
 }

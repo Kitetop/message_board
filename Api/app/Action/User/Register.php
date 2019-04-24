@@ -9,7 +9,6 @@ namespace App\Action\User;
 
 
 use Kite\Action\AbstractAction;
-use Kite\Service\AbstractService;
 
 class Register extends AbstractAction
 {
@@ -50,7 +49,7 @@ class Register extends AbstractAction
         $this->validateUploadFile($this->postImage);
         $service = $this->Service('User\Register');
         $service->account = trim($this->params['account']);
-        $service->username = $this->params['username'];
+        $service->username = trim($this->params['username']);
         $service->password = md5(trim($this->params['password']));
         $service->sex = $this->params['sex'];
         $service->image = $this->validatedFiles['image'];
