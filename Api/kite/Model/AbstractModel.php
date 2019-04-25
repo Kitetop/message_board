@@ -105,6 +105,7 @@ Abstract class AbstractModel
 
     /**
      * @param array $array 需要更新的数据
+     * @return $this
      */
     public function import(array $array)
     {

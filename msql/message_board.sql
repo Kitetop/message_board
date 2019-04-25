@@ -68,8 +68,9 @@ create index response_index on message_response (
 drop table if exists message_notice;
 create table message_notice (
   id int not null auto_increment,
+  theme_id int not null comment '所属的帖子的id',
   response_id int not null comment '自己被回复的留言id（等于response表中的response_id）' ,
-  notice_id int not null comment '别人回复的留言id',
+  notice text not null comment '别人回复的信息',
   user_response mediumint not null comment '留言回复者id',
   user_accept mediumint not null comment '留言接收者id(检索条件，确定通知的人)',
   view tinyint not null default 1 comment '是否查看留言（2:查看 1:未查看）',

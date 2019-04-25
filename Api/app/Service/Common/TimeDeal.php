@@ -32,9 +32,51 @@ final class TimeDeal
      */
     public function formatTime($times)
     {
-        $year = substr($times, 0, 4);
-        $day = substr($times, 5, 5);
-        $time = substr($times, 11);
-        return $times;
+        $now = date('Y-m-d');
+        $year = $this->getYear($times);
+        $day = $this->getDay($times);
+        $hours = $this->getHours($times);
+        if($this->getYear($now) != $year) {
+            return $times;
+        } elseif ($this->getDay($now) != $day) {
+            return $day . ' '.$hours;
+        } else {
+            return $this->getHours($times, true);
+        }
+    }
+
+    /**
+     * @param $time
+     * @return bool|string
+     * 获得时间的年
+     */
+    private function getYear($time)
+    {
+        return substr($time, 0, 4);
+    }
+
+    /**
+     * @param $time
+     * @return bool|string
+     * 获得时间的天
+     */
+    private function getDay($time)
+    {
+        return substr($time, 5, 5);
+    }
+
+    /**
+     * @param $time
+     * @param bool $second
+     * @return bool|string
+     * 获得时间的小时
+     */
+    private function getHours($time, $second = false)
+    {
+        $seconds = 5;
+        if($second) {
+            $second = null;
+        }
+        return substr($time, 11, $seconds);
     }
 }

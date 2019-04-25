@@ -42,6 +42,10 @@ $config['logger'] = [
  * 文件上传路径
  */
 $config['upload'] = __DIR__ . '/../../upload';
+/**
+ * 图片服务器地址
+ */
+$config['imageUrl'] = 'http://127.0.0.1:8085';
 
 /**
  * 数据库配置信息

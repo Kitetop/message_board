@@ -34,11 +34,7 @@ class Router extends BaseRouter
             ['path' => '/login', 'action' => 'Login', 'method' => 'POST'],
             ['path' => '/user/register', 'action' => 'User\Register', 'method' => 'POST'],
             ['path' => '/theme/add', 'action' => 'User\AddTheme', 'method' => 'POST'],
-
-            ['path' => '/index', 'action' => 'Index', 'method' => 'GET'],
-            ['path' => '/news/user/:id', 'action' => 'Index', 'method' => 'GET'],
-            ['path' => '/news/:name', 'action' => 'Index', 'method' => 'GET'],
-            ['path' => '/news/user/:username/:password', 'action' => 'Index', 'method' => 'GET'],
+            ['path' => '/response/add', 'action' => 'User\AddResponse', 'method' => 'POST'],
         ];
         return $routers;
     }

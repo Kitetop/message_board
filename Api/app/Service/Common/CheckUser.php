@@ -26,19 +26,23 @@ final class CheckUser
 
     /**
      * 验证此用户是否是管理员
-     * @param MessageUser $user
-     * @return
+     * @return bool
      */
-    public function checkStatus(MessageUser $user)
+    public function checkStatus()
     {
-        if($user->status == MessageUser::ADMINER) {
+        if($this->user->status == MessageUser::ADMINER) {
             return true;
         }
         return false;
     }
 
-    private function checkSelf()
+    /**
+     * @param $id
+     * @return bool
+     * 验证是否是本人
+     */
+    private function checkSelf($id)
     {
-
+        return ($this->user->id == $id);
     }
 }
