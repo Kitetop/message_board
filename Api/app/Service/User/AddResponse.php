@@ -26,7 +26,7 @@ class AddResponse extends AbstractService
         $check = $this->initCheck();
         if ($check === true) {
             $context = $this->getContext();
-            if ($this->fatherId == 0 || $this->responseId == 0) {
+            if ($this->fatherId == 0 && $this->responseId == 0) {
                 //直接回复帖子的留言
                 $notice = $this->theme->user_id;
             } else {
@@ -74,13 +74,27 @@ class AddResponse extends AbstractService
         if (!$this->theme->exist()) {
             return Response::error(400, '回复的帖子不存在');
         }
-        if ($this->responseId != 0) {
+        //检测回复留言的留言各种id设置是否合理
+        return $this->checkResponse();
+    }
+
+    /**
+     * @return array|bool
+     * 避免fatherId 和 responseId不统一的问题
+     */
+    private function checkResponse()
+    {
+        if(($this->responseId == 0 || $this->fatherId == 0) && ($this->responseId != $this->fatherId)) {
+            return Response::error(400, '非法的留言请求');
+        }
+        if($this->responseId != 0) {
             $this->response = new MessageResponse(['id' => $this->responseId]);
-            if ($this->fatherId == 0 || !(new MessageResponse(['id' => $this->fatherId]))->exist()) {
-                return Response::error(400, '无效的父系留言');
-            }
+            $father = new MessageResponse(['id' => $this->fatherId]);
             if (!$this->response->exist()) {
                 return Response::error(400, '回复的留言不存在');
+            }
+            if(!$father->exist() || $father->father_id != 0) {
+                return Response::error(400, '无效的父系留言');
             }
         }
         return true;
