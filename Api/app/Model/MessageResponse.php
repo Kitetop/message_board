@@ -12,6 +12,8 @@ use Kite\Model\AbstractModel;
 
 class MessageResponse extends AbstractModel
 {
+    const TEXT = 0;
+    const IMAGE = 1;
     protected function table()
     {
         // TODO: Implement table() method.

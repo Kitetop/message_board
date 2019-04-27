@@ -143,7 +143,15 @@ Abstract class AbstractModel
     }
 
     /**
-     * @param $value 插入数据库的字段
+     * @return 查询的结果集
+     * 获得查询到的结果集
+     */
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    /**
      * 表的更新以及插入操作的统一操作
      */
     public function save()
@@ -164,7 +172,7 @@ Abstract class AbstractModel
      * @param string $key 主键的名字
      * 设置主键
      */
-    public function setPrimary(string $key)
+    public function setPrimary($key)
     {
         $this->primary = $key;
     }
