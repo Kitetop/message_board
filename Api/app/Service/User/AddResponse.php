@@ -125,7 +125,7 @@ class AddResponse extends AbstractService
     /**
      * @param $notice
      * @param $context
-     * 存储信息
+     * 存储信息 更新帖子表中的回复数量字段
      */
     private function saveResponse($notice, $context)
     {
@@ -142,6 +142,8 @@ class AddResponse extends AbstractService
             'report' => 0,
             'context' => $context,
         ])->save();
+        $this->theme->response_num += 1;
+        $this->theme->save();
     }
 
     /**

@@ -23,7 +23,7 @@ $config['action'] = [
     'namespace' => '\\' . __NAMESPACE__ . '\\Action' //action的子命名空间
 ];
 if (PHP_SAPI != 'cli') {
-    $config['rootUrl'] = "http://10.0.20.198:8090";
+    $config['rootUrl'] = "http://127.0.0.1:8090";
     $config['realUrl'] = $config['rootUrl'] . $config['action']['base'];
     $config['assetUrl'] = $config['rootUrl'] . '/assets';
 } else {
