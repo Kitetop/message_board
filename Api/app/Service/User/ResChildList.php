@@ -8,12 +8,22 @@
 namespace app\Service\User;
 
 
+use app\Service\Common\ResponseFunc;
+use Kite\Commons\Response;
 use Kite\Service\AbstractService;
 
 class ResChildList extends AbstractService
 {
     protected function execute()
     {
-
+        $response = new ResponseFunc($this->id, $this->limit, $this->page);
+        $result = $response->findChild();
+        $result = $this->call('Common\ResponseData',[
+            'result' => $result
+        ]);
+        $where = ['father_id' => $this->id];
+        $url = $this->config['rootUrl'] . '/response/clist?';
+        $result = $response->getReturn($result, $url, $this->params, $where);
+        return Response::success(null, $result);
     }
 }

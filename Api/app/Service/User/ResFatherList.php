@@ -7,17 +7,14 @@
 
 namespace app\Service\User;
 
-
-use App\Model\MessageResponse;
 use app\Service\Common\ResponseFunc;
-use Kite\Commons\Page;
 use Kite\Commons\Response;
 use Kite\Service\AbstractService;
 
 /**
  * Class ResponseList
  * @package app\Service\User
- * 显示帖子的留言
+ * 显示帖子的直系留言
  */
 class ResFatherList extends AbstractService
 {
