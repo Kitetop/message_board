@@ -11,6 +11,7 @@ namespace Kite\Model\MySQL;
 class LibPDO
 {
     private static $instance = [];
+    private $pdo = null;
 
     /**
      * @return static
@@ -22,6 +23,22 @@ class LibPDO
             self::$instance[$class_name] = new $class_name;
         }
         return self::$instance[$class_name];
+    }
+
+    /**
+     * @param $dsn
+     * @param $user
+     * @param $password
+     * @return \PDO|null
+     */
+    public function getPDO($dsn, $user, $password)
+    {
+        if($this->pdo instanceof \PDO) {
+            return $this->pdo;
+        }
+        $this->pdo = new \PDO($dsn, $user, $password);
+        $this->pdo->query('set names utf8');
+        return $this->pdo;
     }
 
     /**

@@ -34,6 +34,8 @@ class AddResponse extends AbstractService
                 $notice = $this->response->user_response;
             };
             try {
+                $pdo = $this->user->getDao();
+                $pdo->beginTransaction();
                 $this->saveResponse($notice, $context);
                 /**之后要添加添加提示的接口
                  * notice == notice 回复留言的文本信息
@@ -50,8 +52,10 @@ class AddResponse extends AbstractService
                     'responseId' => $this->responseId,
 
                 ]);
+                $pdo->commit();
                 return Response::success('回复成功');
             } catch (\Exception $e) {
+                $pdo->rollBack();
                 return Response::error(400, '回复失败，请稍后在试');
             }
 

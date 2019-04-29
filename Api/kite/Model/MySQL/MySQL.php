@@ -38,8 +38,7 @@ final class MySQL
     {
         try {
             $this->table = $table;
-            $this->pdo = new \PDO($this->dsn, $this->user, $this->password);
-            $this->pdo->query('set names utf8');
+            $this->pdo = LibPDO::getInstance()->getPDO($this->dsn, $this->user,$this->password);
         } catch (\PDOException $e) {
             throw new \Exception($e->getMessage(), 500);
         }
