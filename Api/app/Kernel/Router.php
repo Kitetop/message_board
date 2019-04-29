@@ -44,6 +44,7 @@ class Router extends BaseRouter
             ['path' => '/response/add', 'action' => 'User\AddResponse', 'method' => 'POST'],
             ['path' => '/response/flist', 'action' => 'User\ResFatherList', 'method' => 'GET'],
             ['path' => '/response/clist', 'action' => 'User\ResChildList', 'method' => 'GET'],
+            ['path' => '/response/action', 'action' => 'User\ResAgrOrRep', 'method' => 'GET'],
         ];
         return $routers;
     }

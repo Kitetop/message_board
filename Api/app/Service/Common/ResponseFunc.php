@@ -50,6 +50,7 @@ final class ResponseFunc
     {
         $result = $this->response->find()
             ->where(['father_id' => $this->id])
+            ->order(['agree' => 'DESC'])
             ->page(($this->page - 1) * $this->limit, $this->limit)
             ->execute()->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
