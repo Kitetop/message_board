@@ -57,6 +57,21 @@ final class ResponseFunc
     }
 
     /**
+     * @param array $where
+     * @return mixed
+     * 查找指定举报次数多的留言
+     */
+    public function findMostReport(array $where)
+    {
+        $result = $this->response->find()
+            ->where($where)
+            ->order(['report' => 'DESC'])
+            ->page(($this->page - 1) * $this->limit, $this->limit)
+            ->execute()->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    /**
      * @param $result
      * @param $url
      * @param $params

@@ -37,6 +37,7 @@ class Router extends BaseRouter
 
             //admin的相关接口
             ['path' => '/admin/active', 'action' => 'Admin\BanOrRelUser', 'method' => 'GET'],
+            ['path' => '/report/list', 'action' => 'Admin\ReportList', 'method' => 'GET'],
 
             //帖子的相关操作
             ['path' => '/theme/add', 'action' => 'User\AddTheme', 'method' => 'POST'],
