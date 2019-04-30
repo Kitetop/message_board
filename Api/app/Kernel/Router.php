@@ -35,6 +35,9 @@ class Router extends BaseRouter
             ['path' => '/user/register', 'action' => 'User\Register', 'method' => 'POST'],
             ['path' => '/user/info', 'action' => 'User\UserInfo', 'method' => 'GET'],
 
+            //admin的相关接口
+            ['path' => '/admin/active', 'action' => 'Admin\BanOrRelUser', 'method' => 'GET'],
+
             //帖子的相关操作
             ['path' => '/theme/add', 'action' => 'User\AddTheme', 'method' => 'POST'],
             ['path' => '/theme/list', 'action' => 'User\ThemeList', 'method' => 'GET'],
