@@ -26,7 +26,7 @@ class Router extends BaseRouter
     }
 
     /**
-     * @return Array 自定义的路由
+     * @return array 自定义的路由
      */
     public function routers()
     {
@@ -49,6 +49,7 @@ class Router extends BaseRouter
             ['path' => '/response/flist', 'action' => 'User\ResFatherList', 'method' => 'GET'],
             ['path' => '/response/clist', 'action' => 'User\ResChildList', 'method' => 'GET'],
             ['path' => '/response/action', 'action' => 'User\ResAgrOrRep', 'method' => 'GET'],
+            ['path' => '/response/delete', 'action' => 'DeleteResponse', 'method' => 'GET'],
         ];
         return $routers;
     }
