@@ -9,6 +9,7 @@ namespace App\Service\User;
 
 
 use App\Model\MessageTheme;
+use App\Service\Common\TimeDeal;
 use Kite\Commons\Page;
 use Kite\Commons\Response;
 use Kite\Service\AbstractService;
@@ -27,6 +28,7 @@ class ThemeList extends AbstractService
         } else {
             $result = $this->findByTime();
         }
+        $this->assembleData($result);
         $url = $this->config['rootUrl'] . '/theme/list?';
         Page::assemble($result, $total, $this->page, $this->limit);
         list($result['prev'], $result['next']) = Page::simple($result['meta'], $url, $this->params);
@@ -34,6 +36,17 @@ class ThemeList extends AbstractService
         return Response::success(null, $result);
     }
 
+    /**
+     * @param $result
+     * 对于返回数据进行格式化
+     */
+    private function assembleData(&$result)
+    {
+        $timeDeal = new TimeDeal();
+        foreach ($result as &$value) {
+            $value['time'] = $timeDeal->formatTime($value['time']);
+        }
+    }
     /**
      * @return mixed
      * 根据回复的数量来确定最热门的帖子

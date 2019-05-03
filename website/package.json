@@ -18,6 +18,7 @@
     "ajv-keywords": "^2.1.1",
     "axios": "^0.18.0",
     "bootstrap": "^3.4.1",
+    "element-ui": "^2.8.2",
     "expose-loader": "^0.7.5",
     "jquery": "^3.4.0",
     "vue": "^2.5.2",

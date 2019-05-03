@@ -7,6 +7,8 @@ import axios from 'axios'
 import  VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
 import $ from 'jquery'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import HOST from '@/config/httpd.js'
@@ -18,6 +20,7 @@ Vue.config.productionTip = false;
 Vue.prototype.HOST = HOST;
 Vue.use(VueAxios, axios);
 Vue.use(VueCookies);
+Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

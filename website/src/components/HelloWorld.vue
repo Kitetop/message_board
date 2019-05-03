@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="col-sm-2 col-sm-offset-5">
   <div class="dropdown">
     <button class="btn btn-default dropdown-toggle" type="button" id="test" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Dropdown
