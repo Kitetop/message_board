@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <button class="btn btn-default dropdown-toggle" type="button" id="test" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Dropdown
       <span class="caret"></span>
     </button>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -24,12 +25,12 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
+  created () {
+    this.test();
+  },
   methods: {
     test() {
-      $("#test").click(function () {
-        alert("hhh")
-      })
-      console.log("hhh")
+      console.log(this.HOST.HOST)
     }
   }
 }

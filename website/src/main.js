@@ -9,10 +9,13 @@ import VueCookies from 'vue-cookies'
 import $ from 'jquery'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import HOST from '@/config/httpd.js'
 
 
-Vue.config.productionTip = false
 
+Vue.config.productionTip = false;
+
+Vue.prototype.HOST = HOST;
 Vue.use(VueAxios, axios);
 Vue.use(VueCookies);
 /* eslint-disable no-new */
