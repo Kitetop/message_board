@@ -35,6 +35,7 @@ class ResponseData extends AbstractService
             $value['user_sex'] = $user['sex'];
             $value['user_image'] = $user['image'];
             $context = unserialize($value['context']);
+            $value['type'] = $context['type'];
             $context['type'] == MessageResponse::TEXT && $value['context'] = $context['text'];
             $context['type'] == MessageResponse::IMAGE && $value['context'] = $this->config['imageUrl'] . $context['text'];
         }
