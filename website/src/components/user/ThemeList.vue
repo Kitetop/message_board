@@ -27,7 +27,7 @@
                             <p>回复：{{theme.response_num}}</p>
                         </el-col>
                         <el-col :span="5">
-                            <p>时间：{{theme.time}}</p>
+                            <p style="color: #88aba6">时间：{{theme.time}}</p>
                         </el-col>
                     </el-row>
                 </div>

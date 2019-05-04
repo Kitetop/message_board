@@ -71,7 +71,7 @@ class AddResponse extends AbstractService
     private function initCheck()
     {
         $this->user = new MessageUser(['id' => $this->userId]);
-        if (!$this->user->exist() || $this->user->status == MessageUser::BAN) {
+        if (!$this->user->exist() || $this->user->active == MessageUser::BAN) {
             return Response::error(400, '非法用户，无法进行回复留言');
         }
         $this->theme = new MessageTheme(['id' => $this->themeId]);

@@ -64,13 +64,19 @@
                                           class="glyphicon glyphicon glyphicon-thumbs-down" aria-hidden="true"> {{'：' + father.report}}</span>
                                     </el-col>
                                     <el-col :span="4" :offset="18">
-                                        {{father.time}}
+                                        <p style="color: #88aba6">时间：{{father.time}}</p>
                                     </el-col>
                                     <el-col :span="2">
                                     <span class="glyphicon glyphicon glyphicon glyphicon-comment"
+                                          @click="changeFlag(index)"
                                           aria-hidden="true"> 回复</span>
                                     </el-col>
                                 </el-row>
+                            </el-row>
+                            <el-row v-if="flag[index]">
+                                <el-col :span="24">
+                                    <response-list :theme-id="father.id"></response-list>
+                                </el-col>
                             </el-row>
                         </div>
                     </el-card>
@@ -81,8 +87,11 @@
 </template>
 
 <script>
+    import ResponseList from './ResponseList';
+
     export default {
         name: "ThemeInfo",
+        components: {ResponseList},
         data() {
             return {
                 id: null,
@@ -91,7 +100,9 @@
                 userStyle: null,
                 total: null,
                 page: null,
-                fathers: {}
+                fathers: {},
+                response: false,
+                flag: [],
             }
         },
         created() {
@@ -100,6 +111,14 @@
             this.getData();
         },
         methods: {
+            changeFlag(index) {
+                if(this.flag[index] == true) {
+                    this.flag.splice(0, this.flag.length);
+                }else {
+                    this.flag.splice(0, this.flag.length);
+                    this.flag[index] = true;
+                }
+            },
             /**
              * 设置性别图标
              */
@@ -189,7 +208,7 @@
 
     .man {
         text-align: center;
-        color: #409EFF;
+        color: #4B5CC4;
     }
 
     .woman {

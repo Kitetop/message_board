@@ -22,6 +22,7 @@ class ResponseData extends AbstractService
     {
         // TODO: Implement execute() method.
         $result = $this->result;
+        $timeDeal = new TimeDeal();
         foreach ($result as &$value) {
             $user = $this->call('Common\UserInfo', [
                 'id' => $value['user_response']
@@ -34,6 +35,7 @@ class ResponseData extends AbstractService
             $value['user_name'] = $user['username'];
             $value['user_sex'] = $user['sex'];
             $value['user_image'] = $user['image'];
+            $value['time'] = $timeDeal->formatTime($value['time']);
             $context = unserialize($value['context']);
             $value['type'] = $context['type'];
             $context['type'] == MessageResponse::TEXT && $value['context'] = $context['text'];
