@@ -52,7 +52,7 @@
                 this.$emit('show-dialog');
                 let data = new FormData();
                 data.append('themeId', this.themeId);
-                data.append('userId', 1);
+                data.append('userId', this.$cookies.get('userId'));
                 data.append('fatherId', this.fatherId);
                 data.append('responseId', this.responseId);
                 data.append('type', this.type);

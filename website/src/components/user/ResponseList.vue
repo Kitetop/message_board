@@ -52,7 +52,9 @@
                                         </el-col>
                                         <el-col :span="2">
                                     <span class="el-icon-chat-dot-round"
-                                          style="vertical-align: middle">
+                                          style="vertical-align: middle"
+                                          @click="showDialog(response.id)"
+                                    >
                                         <span style="vertical-align: text-top"> 回复</span>
                                     </span>
                                         </el-col>
@@ -132,8 +134,12 @@
         methods: {
             //显示dialog
             showDialog(responseId) {
-                this.responseId = responseId;
-                this.visit = !this.visit;
+                if(this.$cookies.get('userId') == null) {
+                    alert('你还没有登录，需要登录后才能发布留言');
+                } else {
+                    this.responseId = responseId;
+                    this.visit = !this.visit;
+                }
             },
             //得到指定页数的数据
             changePage(page) {

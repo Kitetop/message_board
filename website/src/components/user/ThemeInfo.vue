@@ -28,8 +28,8 @@
                         <span
                                 class="el-icon-chat-dot-round text"
                                 aria-hidden="true"
-                                @click="showDialog(fatherId)"
-                        ><span style="vertical-align: text-top;margin-left:10px; color: #b0a4e3">回复</span></span>
+                                @click="showDialog(0)"
+                        ><span style="vertical-align: text-top;margin-left:10px;">回复</span></span>
                         </el-col>
                     </el-card>
                 </el-col>
@@ -91,15 +91,26 @@
                 </el-col>
             </el-row>
         </div>
+
+        <!--回复消息dialog组件-->
+        <div v-if="visit">
+            <add-response-dialog
+                    :theme-id="id"
+                    :response-id="responseId"
+                    :father-id=0
+                    @show-dialog="showDialog"
+            ></add-response-dialog>
+        </div>
     </div>
 </template>
 
 <script>
     import ResponseList from './ResponseList';
+    import AddResponseDialog from './AddResponseDialog'
 
     export default {
         name: "ThemeInfo",
-        components: {ResponseList},
+        components: {ResponseList, AddResponseDialog},
         data() {
             return {
                 id: null,
@@ -111,6 +122,7 @@
                 fathers: {},
                 response: false,
                 flag: [],
+                visit: false
             }
         },
         created() {
@@ -119,6 +131,15 @@
             this.getData();
         },
         methods: {
+            //显示dialog
+            showDialog(responseId) {
+                if (this.$cookies.get('userId') == null) {
+                    alert('你还没有登录，需要登录后才能发布留言');
+                } else {
+                    this.responseId = responseId;
+                    this.visit = !this.visit;
+                }
+            },
             changeFlag(index) {
                 if (this.flag[index] == true) {
                     this.flag.splice(0, this.flag.length);
