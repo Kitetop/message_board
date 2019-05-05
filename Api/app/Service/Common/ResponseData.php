@@ -27,6 +27,10 @@ class ResponseData extends AbstractService
             $user = $this->call('Common\UserInfo', [
                 'id' => $value['user_response']
             ])['data'];
+            $accept = $this->call('Common\UserInfo', [
+                'id' => $value['user_accept']
+            ])['data'];
+            $value['accept_name'] = $accept['username'];
             unset($value['user_response']);
             unset($value['user_accept']);
             unset($value['father_id']);
