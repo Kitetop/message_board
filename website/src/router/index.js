@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Main from '../components/user/Mian'
 import ThemeList from "../components/user/ThemeList";
 import ThemeInfo from "../components/user/ThemeInfo";
-
+import UserCenter from "../components/user/UserCenter"
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +21,10 @@ export default new Router({
         {
           path : 'theme_info',
           component: ThemeInfo
+        },
+        {
+          path: 'user/center',
+          component: UserCenter
         }
       ]
     }

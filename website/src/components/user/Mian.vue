@@ -12,7 +12,7 @@
                 </el-col>
             </el-row>
         </el-main>
-        <el-footer class="footer">
+        <el-footer>
             <el-row>
                 <el-col :span="4" :offset="4">
                     <div @click="index" style="text-align: center" v-bind:class="choose[0]">
@@ -74,6 +74,7 @@
             center() {
                 this.choose.splice(0, 4);
                 this.choose[3] = this.background;
+                this.$router.push({path: '/user/center'})
             }
         },
         created() {
@@ -86,10 +87,5 @@
     .choose {
         background: #409EFF;
         color: #E4E7ED;
-    }
-    .footer {
-        position:fixed;
-        bottom: 0px;
-        width:100%;
     }
 </style>

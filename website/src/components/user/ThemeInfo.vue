@@ -92,6 +92,18 @@
             </el-row>
         </div>
 
+        <!--分页部分-->
+        <div style="text-align: center">
+            <el-row>
+                <el-col>
+                    <Page v-bind:total='total'
+                          v-bind:size=5
+                          @change-page = 'changePage'
+                    ></Page>
+                </el-col>
+            </el-row>
+        </div>
+
         <!--回复消息dialog组件-->
         <div v-if="visit">
             <add-response-dialog
@@ -106,11 +118,12 @@
 
 <script>
     import ResponseList from './ResponseList';
-    import AddResponseDialog from './AddResponseDialog'
+    import AddResponseDialog from './AddResponseDialog';
+    import Page from './Page';
 
     export default {
         name: "ThemeInfo",
-        components: {ResponseList, AddResponseDialog},
+        components: {ResponseList, AddResponseDialog, Page},
         data() {
             return {
                 id: null,
@@ -186,10 +199,19 @@
             getData() {
                 this.getFather();
             },
-            getFather() {
+            changePage(page) {
+                this.getFather(page);
+            },
+            /**
+             * 得到父系留言
+             */
+            getFather(page = null) {
                 this.axios({
                     url: this.HOST.HOST + '/response/flist',
-                    params: {id: this.id}
+                    params: {
+                        id: this.id,
+                        page: page
+                    }
                 }).then(response => {
                     if (response.data.status == 0) {
                         let data = response.data.data;
