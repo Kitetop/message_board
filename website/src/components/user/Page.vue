@@ -8,6 +8,7 @@
             @current-change = 'currentPage'
             background
             layout="total, prev, pager, next"
+            :page-size=size
             :total= total>
     </el-pagination>
 </template>
@@ -15,7 +16,7 @@
 <script>
     export default {
         name: "Page",
-        props:['total'],
+        props:['total', 'size'],
         methods: {
             currentPage(page) {
                 this.$emit('change-page', page)

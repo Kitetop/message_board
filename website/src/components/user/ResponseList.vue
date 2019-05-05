@@ -25,7 +25,8 @@
                         </el-row>
                     </el-col>
                     <el-col :span="2">
-                        <p style="margin-top: 20px;color:#cca4e3">回复:<span style="color: #674598"> {{response.accept_name}}</span></p>
+                        <p style="margin-top: 20px;color:#cca4e3">回复:<span style="color: #674598"> {{response.accept_name}}</span>
+                        </p>
                     </el-col>
                     <el-col :span="20">
                         <el-card class="box-card">
@@ -50,8 +51,10 @@
                                             <p style="color: #88aba6">时间：{{response.time}}</p>
                                         </el-col>
                                         <el-col :span="2">
-                                    <span class="glyphicon glyphicon glyphicon glyphicon-comment"
-                                          aria-hidden="true"> 回复</span>
+                                    <span class="el-icon-chat-dot-round"
+                                          style="vertical-align: middle">
+                                        <span style="vertical-align: text-top"> 回复</span>
+                                    </span>
                                         </el-col>
                                     </el-row>
                                 </el-row>
@@ -60,27 +63,82 @@
                     </el-col>
                 </el-row>
             </div>
+            <div>
+                <el-row>
+                    <!--分页组件-->
+                    <el-col :span="10" :offset="8">
+                        <Page
+                                v-bind:total="total"
+                                :size="size"
+                                @change-page='changePage'>
+                        </Page>
+                    </el-col>
+                    <!--回复父楼-->
+                    <el-col :offset="22">
+                        <span
+                                class="el-icon-chat-dot-round"
+                                aria-hidden="true"
+                                @click="showDialog(fatherId)"
+                        ><span style="vertical-align: text-top"> 回复</span></span>
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
+
+        <!--回复消息组件-->
+        <div v-if="visit">
+            <add-response-dialog
+                    :theme-id="themeId"
+                    :response-id="responseId"
+                    :father-id="fatherId"
+                    @show-dialog="showDialog"
+            ></add-response-dialog>
         </div>
         <div v-if="!flag">
             暂无留言
+            <!--回复父楼-->
+            <el-col :offset="22">
+                        <span
+                                class="el-icon-chat-dot-round"
+                                aria-hidden="true"
+                                @click="showDialog(fatherId)"
+                        ><span style="vertical-align: text-top"> 回复</span></span>
+            </el-col>
         </div>
     </div>
 </template>
 
 <script>
+    import Page from "./Page";
+    import AddResponseDialog from "./AddResponseDialog";
+
     export default {
         name: "ResponseList",
-        props: ['themeId'],
+        components: {AddResponseDialog, Page},
+        props: ['themeId', 'fatherId'],
         data() {
             return {
                 responses: {},
-                flag: true
+                flag: true,
+                total: 0,
+                size: 2,
+                visit: false,
+                responseId: 0,
             }
         },
         created() {
-            this.responseList(this.themeId);
+            this.responseList(this.fatherId);
         },
         methods: {
+            //显示dialog
+            showDialog(responseId) {
+                this.responseId = responseId;
+                this.visit = !this.visit;
+            },
+            //得到指定页数的数据
+            changePage(page) {
+                this.responseList(this.fatherId, page);
+            },
             /**
              * 用户点赞举报
              */
@@ -103,23 +161,26 @@
 
                 })
             },
-            responseList(id, page = 1) {
+            responseList(id, page = 1, limit = 2) {
                 this.axios({
                     url: this.HOST.HOST + 'response/clist',
                     params: {
-                        id: this.themeId,
-                        page: page
+                        id: id,
+                        page: page,
+                        limit: limit
                     }
                 }).then(res => {
                     if (res.data.status == 0) {
                         let data = res.data.data;
                         if (data.total == 0) {
                             this.flag = false;
+                        } else {
+                            this.total = Number(data.total);
+                            delete data['next'];
+                            delete data['total'];
+                            delete data['prev'];
+                            this.responses = data;
                         }
-                        delete data['next'];
-                        delete data['total'];
-                        delete data['prev'];
-                        this.responses = data;
                     } else {
                         alert(res.data.message);
                     }

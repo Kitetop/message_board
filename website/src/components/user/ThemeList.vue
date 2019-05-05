@@ -11,7 +11,7 @@
                     <el-button @click="setType(1)" size="small" plain autofocus type="primary" round>最新 <i class="el-icon-arrow-right el-icon-position"></i></el-button>
                 </el-col>
                 <el-col :span="2">
-                    <el-button @click="setType(0)" size="small" plain type="danger" round>最热 <i class="el-icon-arrow-right el-icon-sunny"></i></el-button>
+                    <el-button @click="setType(0)" size="small" plain type="danger" round>最热 <i class="glyphicon glyphicon-fire"></i></el-button>
                 </el-col>
             </el-row>
         </div>
@@ -39,9 +39,7 @@
             <el-row>
                 <el-col>
                     <Page v-bind:total='total'
-                          v-bind:typeof='type'
-                          v-bind:next='next'
-                          v-bind:prev='prev'
+                          v-bind:size='size'
                           @change-page = 'changePage'
                     ></Page>
                 </el-col>
@@ -61,8 +59,7 @@
                 themes: {},
                 type: 1,
                 total: 0,
-                next: null,
-                prev: null,
+                size: 5,
             }
         },
         created() {
@@ -86,7 +83,7 @@
                 });
             },
             //获得帖子数据
-            themeList(page = null,limit = null) {
+            themeList(page = null,limit = 5) {
                 this.axios({
                     url: this.HOST.HOST + '/theme/list',
                     method: 'GET',
@@ -100,7 +97,6 @@
                         let data = response.data.data;
                         this.next = data.next;
                         this.total = Number(data.total);
-                        this.prev = data.prev;
                         delete data['next'];
                         delete data['total'];
                         delete data['prev'];

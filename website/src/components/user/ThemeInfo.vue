@@ -23,6 +23,14 @@
                         <div class="text item">
                             {{theme.context}}
                         </div>
+                        <!--回复父楼-->
+                        <el-col :offset="22" :span="2">
+                        <span
+                                class="el-icon-chat-dot-round text"
+                                aria-hidden="true"
+                                @click="showDialog(fatherId)"
+                        ><span style="vertical-align: text-top;margin-left:10px; color: #b0a4e3">回复</span></span>
+                        </el-col>
                     </el-card>
                 </el-col>
             </div>
@@ -67,15 +75,15 @@
                                         <p style="color: #88aba6">时间：{{father.time}}</p>
                                     </el-col>
                                     <el-col :span="2">
-                                    <span class="glyphicon glyphicon glyphicon glyphicon-comment"
+                                    <span class="el-icon-message-solid"
                                           @click="changeFlag(index)"
-                                          aria-hidden="true"> 回复</span>
+                                          aria-hidden="true"> <span style="vertical-align: text-top"> 留言</span></span>
                                     </el-col>
                                 </el-row>
                             </el-row>
                             <el-row v-if="flag[index]">
                                 <el-col :span="24">
-                                    <response-list :theme-id="father.id"></response-list>
+                                    <response-list :father-id="father.id" :theme-id="id"></response-list>
                                 </el-col>
                             </el-row>
                         </div>
@@ -112,9 +120,9 @@
         },
         methods: {
             changeFlag(index) {
-                if(this.flag[index] == true) {
+                if (this.flag[index] == true) {
                     this.flag.splice(0, this.flag.length);
-                }else {
+                } else {
                     this.flag.splice(0, this.flag.length);
                     this.flag[index] = true;
                 }
