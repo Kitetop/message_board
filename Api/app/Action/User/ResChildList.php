@@ -26,7 +26,7 @@ class ResChildList extends AbstractAction
         'limit' => [
             'desc' => '每一页的数据存储',
             'rules' => ['Logic:gt:0'],
-            'default' => 5
+            'default' => 2
         ],
     ];
 

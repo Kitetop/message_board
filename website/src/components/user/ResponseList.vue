@@ -25,7 +25,7 @@
                         </el-row>
                     </el-col>
                     <el-col :span="2">
-                        <p style="margin-top: 20px;color:#cca4e3">回复:</p>
+                        <p style="margin-top: 20px;color:#cca4e3">回复:<span style="color: #674598"> {{response.accept_name}}</span></p>
                     </el-col>
                     <el-col :span="20">
                         <el-card class="box-card">

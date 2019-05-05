@@ -15,7 +15,7 @@
                             <img v-if="theme.user_sex != 1" src="../../assets/woman.png"
                                  style="height: 10px;width: 10px">
                         </el-col>
-                        <el-col :span="12"><p v-bind:class="userStyle">{{theme.user_name}}</p></el-col>
+                        <el-col :span="12"><p>{{theme.user_name}}</p></el-col>
                     </el-row>
                 </el-col>
                 <el-col :span="21">
@@ -39,8 +39,8 @@
                                  style="height: 10px;width: 10px">
                         </el-col>
                         <el-col :span="12">
-                            <p v-if="father.user_sex == 1" class="man">{{father.user_name}}</p>
-                            <p v-if="father.user_sex == 0" class="woman">{{father.user_name}}</p>
+                            <p v-if="father.user_sex == 1">{{father.user_name}}</p>
+                            <p v-if="father.user_sex == 0">{{father.user_name}}</p>
                         </el-col>
                     </el-row>
                 </el-col>
