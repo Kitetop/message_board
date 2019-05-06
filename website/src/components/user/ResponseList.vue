@@ -47,18 +47,33 @@
                                     <span @click="action(response.id, index, 1)"
                                           class="glyphicon glyphicon glyphicon-thumbs-down" aria-hidden="true"> {{'：' + response.report}}</span>
                                         </el-col>
-                                        <el-col :span="5" :offset="17">
-                                            <p style="color: #88aba6">时间：{{response.time}}</p>
+                                    </el-row>
+                                </el-row>
+
+                                <!--子留言底部-->
+                                <el-row style="margin-top: 10px">
+
+                                    <!--删除按钮-->
+                                    <div v-if="((response.user_id == userId) || (userStatus == 1))">
+                                        <el-col :span="2" style="color: #a1afc9">
+                                        <span
+                                                class="el-icon-delete text"
+                                                @click="deleteResponse(response.id)"
+                                        ><span style="vertical-align: text-top;margin-left:10px;">删除</span></span>
                                         </el-col>
-                                        <el-col :span="2">
-                                    <span class="el-icon-chat-dot-round"
-                                          style="vertical-align: middle"
-                                          @click="showDialog(response.id)"
-                                    >
+                                    </div>
+
+                                    <el-col :span="5" :offset="((response.user_id == userId) || (userStatus == 1)) ? 15 : 17">
+                                        <p style="color: #88aba6">时间：{{response.time}}</p>
+                                    </el-col>
+                                    <el-col :span="2">
+                                            <span class="el-icon-chat-dot-round"
+                                                  style="vertical-align: middle"
+                                                  @click="showDialog(response.id)"
+                                            >
                                         <span style="vertical-align: text-top"> 回复</span>
                                     </span>
-                                        </el-col>
-                                    </el-row>
+                                    </el-col>
                                 </el-row>
                             </div>
                         </el-card>
@@ -126,15 +141,19 @@
                 size: 2,
                 visit: false,
                 responseId: 0,
+                userId: 0,
+                userStatus: 0,
             }
         },
         created() {
             this.responseList(this.fatherId);
+            this.userId = this.$cookies.get('userId');
+            this.userStatus = this.$cookies.get('userStatus');
         },
         methods: {
             //显示dialog
             showDialog(responseId) {
-                if(this.$cookies.get('userId') == null) {
+                if (this.$cookies.get('userId') == null) {
                     alert('你还没有登录，需要登录后才能发布留言');
                 } else {
                     this.responseId = responseId;
@@ -192,7 +211,25 @@
                     }
                 }).catch(err => {
                 })
-            }
+            },
+            /**
+             * delete response
+             */
+            deleteResponse(responseId) {
+                this.axios({
+                    url: this.HOST.HOST + 'response/delete',
+                    params: {
+                        id: responseId,
+                        userId: this.userId
+                    }
+                }).then(res => {
+                    alert(res.data.message);
+                    if (res.data.status == 0) {
+                        this.$router.push('empty');
+                        this.$router.go(-1);
+                    }
+                })
+            },
         }
     }
 </script>

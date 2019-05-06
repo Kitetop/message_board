@@ -43,7 +43,7 @@
 
                     <el-row style="margin-top: 20px">
                         <el-col :span="2" style="margin-top: 5px;text-align: right;font-size: 10px">
-                            <span>用户名：</span>
+                            <span>昵称：</span>
                         </el-col>
                         <div class="text item">
                             <el-col :span="8" :offset="1">
@@ -73,7 +73,7 @@
 
                     <el-row style="margin-top: 10px">
                         <el-col :span="2" style="margin-top: 5px;text-align: right;font-size: 10px">
-                            <span>身份：</span>
+                            <span>状态：</span>
                         </el-col>
                         <div class="text item">
                             <el-col :span="8" :offset="1" style="margin-top: 1px">

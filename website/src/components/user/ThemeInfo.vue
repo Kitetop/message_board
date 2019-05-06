@@ -23,14 +23,26 @@
                         <div class="text item">
                             {{theme.context}}
                         </div>
-                        <!--回复父楼-->
-                        <el-col :offset="22" :span="2">
+                        <el-row>
+                            <!--删除帖子-->
+                            <div v-if="((theme.user_id == this.$cookies.get('userId')) || (this.$cookies.get('userStatus') == 1))">
+                                <el-col :span="2" style="color: #a1afc9">
+                                <span
+                                        class="el-icon-delete text"
+                                        @click="deleteTheme(theme.id)"
+                                ><span style="vertical-align: text-top;margin-left:10px;">删除</span></span>
+                                </el-col>
+                            </div>
+
+                            <!--回复父楼-->
+                            <el-col :offset="20" :span="2">
                         <span
                                 class="el-icon-chat-dot-round text"
                                 aria-hidden="true"
                                 @click="showDialog(0)"
                         ><span style="vertical-align: text-top;margin-left:10px;">回复</span></span>
-                        </el-col>
+                            </el-col>
+                        </el-row>
                     </el-card>
                 </el-col>
             </div>
@@ -71,16 +83,32 @@
                                     <span @click="action(father.id, index, 1)"
                                           class="glyphicon glyphicon glyphicon-thumbs-down" aria-hidden="true"> {{'：' + father.report}}</span>
                                     </el-col>
-                                    <el-col :span="4" :offset="18">
-                                        <p style="color: #88aba6">时间：{{father.time}}</p>
+                                </el-row>
+                            </el-row>
+
+                            <!--父楼的底部-->
+                            <el-divider></el-divider>
+                            <el-row>
+                                <!--删除帖子-->
+                                <div v-if="((father.user_id == userId) || (userStatus == 1))">
+                                    <el-col :span="2" style="color: #a1afc9">
+                                <span
+                                        class="el-icon-delete text"
+                                        @click="deleteResponse(father.id)"
+                                ><span style="vertical-align: text-top;margin-left:10px;">删除</span></span>
                                     </el-col>
-                                    <el-col :span="2">
+                                </div>
+
+                                <el-col :span="4" :offset="((father.user_id == userId) || (userStatus == 1))?16:18">
+                                    <p style="color: #88aba6">时间：{{father.time}}</p>
+                                </el-col>
+                                <el-col :span="2">
                                     <span class="el-icon-message-solid"
                                           @click="changeFlag(index)"
                                           aria-hidden="true"> <span style="vertical-align: text-top"> 留言</span></span>
-                                    </el-col>
-                                </el-row>
+                                </el-col>
                             </el-row>
+
                             <el-row v-if="flag[index]">
                                 <el-col :span="24">
                                     <response-list :father-id="father.id" :theme-id="id"></response-list>
@@ -98,7 +126,7 @@
                 <el-col>
                     <Page v-bind:total='total'
                           v-bind:size=5
-                          @change-page = 'changePage'
+                          @change-page='changePage'
                     ></Page>
                 </el-col>
             </el-row>
@@ -128,11 +156,12 @@
             return {
                 id: null,
                 userId: null,
+                userStatus: null,
                 theme: {},
                 userStyle: null,
                 total: null,
                 page: null,
-                fathers: {},
+                fathers: [],
                 response: false,
                 flag: [],
                 visit: false
@@ -140,6 +169,8 @@
         },
         created() {
             this.id = this.$route.query.id;
+            this.userId = this.$cookies.get('userId');
+            this.userStatus = this.$cookies.get('userStatus');
             this.themeInfo(this.id);
             this.getData();
         },
@@ -244,7 +275,31 @@
                 }).catch(error => {
 
                 })
-            }
+            },
+            /**
+             * delete theme
+             */
+            deleteTheme(themeId) {
+
+            },
+            /**
+             * delete response
+             */
+            deleteResponse(responseId) {
+                this.axios({
+                    url: this.HOST.HOST + 'response/delete',
+                    params: {
+                        id: responseId,
+                        userId: this.userId
+                    }
+                }).then(res => {
+                    alert(res.data.message);
+                    if(res.data.status == 0) {
+                        this.$router.push('empty');
+                        this.$router.go(-1);
+                    }
+                })
+            },
         }
     }
 </script>
@@ -272,6 +327,6 @@
     }
 
     .item {
-        padding: 18px 0;
+        padding: 10px 0;
     }
 </style>
