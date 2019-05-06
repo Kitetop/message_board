@@ -32,7 +32,6 @@ class UserInfo extends AbstractService
 
     private function setShow(&$result) {
         unset($result['password']);
-        unset($result['status']);
         $result['image'] = $this->config['imageUrl'] . $result['image'];
         $result['active'] == 0 && $result['active'] = '正常';
         $result['active'] == 1 && $result['active'] = '封禁';

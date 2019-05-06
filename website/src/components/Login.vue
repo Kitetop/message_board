@@ -51,7 +51,7 @@
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     data: qs.stringify(data)
                 }).then(res => {
-                    alert(res.data.message + res.data.status);
+                    alert(res.data.message);
                     if(res.data.status == 0) {
                         let data = res.data.data;
                         this.$cookies.set('userId', data.id, '1d');
