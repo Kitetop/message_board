@@ -31,6 +31,7 @@ class ResponseData extends AbstractService
                 'id' => $value['user_accept']
             ])['data'];
             $value['accept_name'] = $accept['username'];
+            $value['user_id'] = $value['user_response'];
             unset($value['user_response']);
             unset($value['user_accept']);
             unset($value['father_id']);

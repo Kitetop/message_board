@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-  .row {
+/*  .row {
     background-image: url("./assets/background.jpg");
-  }
+  }*/
 </style>

@@ -5,6 +5,28 @@
 ------------------------------------------------->
 <template>
     <div>
+        <!--用户没有登录的显示界面-->
+        <div v-if="!hasLogin">
+            <div>
+                <el-col :offset="9" :span="6">
+                    <img src="../../assets/defaulthead.png" style="width: 200px;height: 200px">
+                </el-col>
+            </div>
+            <div style="margin-top: 30px">
+                <el-col :offset="9" :span="2" style="text-align: right">
+                    <el-link type="primary" @click="login">登 录</el-link>
+
+                </el-col>
+                <el-col :span="1" style="text-align: center">
+                    <span>|</span>
+                </el-col>
+                <el-col :span="2" style="text-align: left">
+                    <el-link type="success" @click="register">注 册</el-link>
+                </el-col>
+            </div>
+        </div>
+
+        <!--用户已经登录的显示页面-->
         <div v-if="hasLogin">
             <el-col :span="3">
                 <!--用户头像部分-->
@@ -117,17 +139,18 @@
 
                         </el-row>
                     </div>
+                    <!--管理员的功能操纵组-->
+                    <div v-if="user.status == 1" style="margin-top: 15px">
+                        <el-row>
+                        <el-col :offset="1">
+                        <el-button @click="systemManage" icon="el-icon-s-tools" type="primary" plain size="small" round>系统管理</el-button>
+                        </el-col>
+                        </el-row>
+                    </div>
                 </el-card>
 
-                <!--管理员的功能操纵组-->
-                <div v-if="user.status == 1">
-
-                </div>
 
             </el-col>
-        </div>
-        <div v-if="!hasLogin">
-            <Login></Login>
         </div>
     </div>
 
@@ -169,8 +192,10 @@
             //检测是否登录并且获得用户信息
             checkLogin() {
                 if (this.$cookies.get('userId') != null) {
-                    this.hasLogin = true;
                     this.userInfo();
+                    this.hasLogin = true;
+                } else {
+                    this.hasLogin = false;
                 }
             },
             //获得用户信息
@@ -187,7 +212,6 @@
                         this.updateUser = JSON.parse(JSON.stringify(this.user));
                     } else {
                         this.$cookies.remove('userId');
-                        this.hasLogin = false;
                     }
                 })
             },
@@ -205,7 +229,20 @@
                 this.$cookies.remove('userId');
                 this.$cookies.remove('userStatus');
                 this.$cookies.remove('userName');
-                this.$router.push({path: '/'})
+                this.$router.push('empty');
+                this.$router.go(-1);
+            },
+            //进入登录界面
+            login() {
+                this.$router.push({path: '/user/login'});
+            },
+            //进入注册页面
+            register() {
+                this.$router.push({path: '/user/register'})
+            },
+            //进入系统管理界面
+            systemManage() {
+                this.$router.push({path: '/admin'})
             }
         }
     }

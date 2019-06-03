@@ -54,9 +54,9 @@
 
         ,
         methods: {
-            changeIndex()
-            {
-                this.choose.splice(0,4);
+            changeIndex(index) {
+
+                this.choose[index] = this.background;
             },
             index() {
                 this.choose.splice(0, 4);
@@ -64,8 +64,9 @@
                 this.$router.push({path: '/'})
             },
             add() {
-                this.choose.splice(0,4);
+                this.choose.splice(0, 4);
                 this.choose[1] = this.background;
+                this.$router.push({path: '/add/theme'})
             },
             message() {
                 this.choose.splice(0, 4);
@@ -75,10 +76,23 @@
                 this.choose.splice(0, 4);
                 this.choose[3] = this.background;
                 this.$router.push({path: '/user/center'})
-            }
+            },
+
         },
         created() {
-            this.choose[0] = this.background;
+            let url = this.$route.path.split('/')[1];
+            if (url === 'index' || url === '') {
+                this.choose[0] = this.background;
+            } else if (url === 'add') {
+                this.choose[1] = this.background;
+            } else if (url === 'message') {
+                this.choose[2] = this.background;
+            } else if (url === 'user') {
+                this.choose[3] = this.background;
+            } else {
+                this.choose.splice(0, 4);
+            }
+
         }
     }
 </script>

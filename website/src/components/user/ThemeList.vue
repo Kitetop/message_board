@@ -78,7 +78,7 @@
             themeInfo(id) {
                 this.$emit('change-index');
                 this.$router.push({
-                    path: 'theme_info',
+                    path: '/index/theme_info',
                     query:{id: id,}
                 });
             },
