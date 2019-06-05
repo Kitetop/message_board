@@ -55,7 +55,7 @@
         ,
         methods: {
             changeIndex(index) {
-
+                this.choose.splice(0, 4);
                 this.choose[index] = this.background;
             },
             index() {
@@ -71,6 +71,7 @@
             message() {
                 this.choose.splice(0, 4);
                 this.choose[2] = this.background;
+                this.$router.push({path: '/message/notice'})
             },
             center() {
                 this.choose.splice(0, 4);

@@ -11,7 +11,7 @@
                     <el-col :span="10" :offset="6">
                     <el-form label-position="right" label-width="80px" size="small">
 
-                        <el-form-item label="用户名:">
+                        <el-form-item label="账户:">
                             <el-input v-model="form.account"></el-input>
                         </el-form-item>
                         <el-form-item label="用户昵称:">
@@ -21,7 +21,7 @@
                             <el-input v-model="form.password"></el-input>
                         </el-form-item>
                         <el-form-item label="头像:">
-                            <input type="file"></input>
+                            <input id="image" type="file"></input>
                         </el-form-item>
                         <el-form-item label="性别:">
                             <el-radio-group v-model="form.sex">
@@ -48,20 +48,18 @@
         data() {
             return {
                 form: {
-                    // name: '',
-                    // region: '',
-                    // date1: '',
-                    // date2: '',
-                    // delivery: false,
-                    // type: [],
-                    // resource: '',
-                    // desc: ''
+                    account: null,
+                    name: null,
+                    password: null,
+                    sex: null
                 }
             }
         },
         methods: {
             onSubmit() {
-                console.log('submit!');
+                this.axios({
+
+                })
             }
         }
     }

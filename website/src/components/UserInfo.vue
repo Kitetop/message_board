@@ -81,7 +81,7 @@
         name: "UserInfo",
         created() {
             this.id = this.$route.query.id;
-            this.userInfo(3);
+            this.userInfo(this.id);
         },
         data() {
             return {

@@ -35,9 +35,11 @@ class Router extends BaseRouter
             ['path' => '/user/register', 'action' => 'User\Register', 'method' => 'POST'],
             ['path' => '/user/info', 'action' => 'User\UserInfo', 'method' => 'GET'],
 
+
             //admin的相关接口
             ['path' => '/admin/active', 'action' => 'Admin\BanOrRelUser', 'method' => 'GET'],
             ['path' => '/report/list', 'action' => 'Admin\ReportList', 'method' => 'GET'],
+            ['path' => '/user/list', 'action' => 'Admin\UserList', 'method' => 'GET'],
 
             //帖子的相关操作
             ['path' => '/theme/add', 'action' => 'User\AddTheme', 'method' => 'POST'],
@@ -50,6 +52,7 @@ class Router extends BaseRouter
             ['path' => '/response/clist', 'action' => 'User\ResChildList', 'method' => 'GET'],
             ['path' => '/response/action', 'action' => 'User\ResAgrOrRep', 'method' => 'GET'],
             ['path' => '/response/delete', 'action' => 'DeleteResponse', 'method' => 'GET'],
+            ['path' => '/response/notice', 'action' => 'User\Notice', 'method' => 'GET'],
         ];
         return $routers;
     }

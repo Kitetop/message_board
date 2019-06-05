@@ -242,7 +242,7 @@
             },
             //进入系统管理界面
             systemManage() {
-                this.$router.push({path: '/admin'})
+                this.$router.push({path: '/admin/user'})
             }
         }
     }

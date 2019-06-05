@@ -10,6 +10,8 @@ import ReportList from "../components/admin/ReportList";
 import AddTheme from "../components/AddTheme";
 import Register from "../components/user/Register";
 import AdminMain from "../components/admin/Main"
+import Notice from "../components/Notice";
+import UserList from "../components/admin/UserList";
 
 Vue.use(Router)
 
@@ -38,6 +40,10 @@ export default new Router({
           component: AddTheme
         },
         {
+          path: 'message/notice',
+          component: Notice,
+        },
+        {
           path: 'user/center',
           component: UserCenter
         },
@@ -58,6 +64,10 @@ export default new Router({
       children: [
         {
           path: 'user',
+          component: UserList
+        },
+        {
+          path: 'user/info',
           component: ManageUser
         },
         {
